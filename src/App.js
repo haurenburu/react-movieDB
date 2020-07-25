@@ -1,26 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Admin, Resource} from "react-admin";
+import jsonServerProvider from 'ra-data-json-server';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import {DirectorList, DirectorEdit, DirectorCreate} from "./Components/Director";
+import {MovieList} from "./Components/Movie";
+const dataProvider = jsonServerProvider('http://localhost:8080');
+//const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+const App = () => (
+  <Admin dataProvider={dataProvider}>
+    <Resource name="director" list={DirectorList} edit={DirectorEdit} create={DirectorCreate} />
+    <Resource name="movie" list={MovieList} />
+  </Admin>
+)
 
 export default App;
