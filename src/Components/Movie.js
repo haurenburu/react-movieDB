@@ -1,5 +1,5 @@
 import React from 'react';
-import { Create, List, Edit, Datagrid, SimpleForm, TextField, TextInput } from 'react-admin';
+import { ArrayInput, SimpleFormIterator, Create, List, Edit, Datagrid, SimpleForm, TextField, TextInput } from 'react-admin';
 
 export const MovieList = props => (
 <List {...props}>
@@ -26,6 +26,13 @@ export const MovieEdit = props => (
 		<TextInput disabled source="id" />
 		<TextInput source="title" />
 		<TextInput source="duration" />
+		<ArrayInput source="actor" label="Actor">
+			<SimpleFormIterator>
+				<TextInput source="quantMovies" />
+				<TextInput source="person.firstName" />
+				<TextInput source="person.lastName" />
+			</SimpleFormIterator>
+		</ArrayInput>
 	</SimpleForm>
 </Edit>
 )
